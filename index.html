@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
+
+<title>IELTS Speaking Notes</title>
+<style>
+  :root{
+    --paper:#f7f5ef;
+    --ink:#343332;
+    --muted:#77736f;
+    --accent:#c56f58;
+    --accent-dark:#9f5846;
+    --line:#4a4744;
+    --soft:#ece7df;
+    --white:#fffdf8;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Microsoft JhengHei","Segoe UI",sans-serif;
+    line-height:1.72;
+  }
+  .page{max-width:980px;margin:auto;padding:34px 24px 72px}
+  .topline{
+    display:flex;justify-content:space-between;align-items:center;
+    gap:18px;padding-bottom:14px;border-bottom:2px solid var(--line);
+    color:var(--muted);font-size:13px;letter-spacing:.12em
+  }
+  .hero{padding:70px 0 56px}
+  .eyebrow{font-size:14px;letter-spacing:.18em;color:var(--accent-dark);font-weight:700}
+  h1{
+    font-size:clamp(54px,10vw,112px);
+    line-height:.9;margin:14px 0 18px;letter-spacing:-.06em;
+    font-weight:900;
+  }
+  h1 .accent{color:var(--accent)}
+  .subtitle{font-size:21px;color:#5d5956;max-width:650px}
+  .meta{
+    display:flex;flex-wrap:wrap;gap:10px 18px;margin-top:24px;
+    font-size:14px;color:var(--muted)
+  }
+  .nav{
+    display:grid;grid-template-columns:repeat(4,1fr);
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    margin-bottom:44px
+  }
+  .nav a{
+    padding:14px 10px;color:var(--ink);text-decoration:none;text-align:center;
+    font-weight:700;font-size:14px;border-right:1px solid #bbb4aa
+  }
+  .nav a:last-child{border-right:0}
+  .question-card{
+    border-top:10px solid var(--accent);
+    background:var(--white);
+    padding:30px;
+    box-shadow:0 9px 30px rgba(40,37,34,.06);
+  }
+  .index{
+    display:inline-block;color:var(--accent);font-weight:800;letter-spacing:.14em;
+    margin-bottom:8px;font-size:13px
+  }
+  h2{font-size:30px;line-height:1.25;margin:0 0 14px;letter-spacing:-.02em}
+  h3{font-size:18px;margin:0 0 12px}
+  .prompt{font-size:19px;font-weight:700}
+  .cue{
+    margin:20px 0 0;padding:18px 20px;background:var(--soft);
+    border-left:4px solid var(--accent)
+  }
+  .cue ul{margin:6px 0 0;padding-left:21px}
+  section{scroll-margin-top:20px}
+  .section{
+    padding:34px 0;border-bottom:1px solid #c8c1b8
+  }
+  .section:last-child{border-bottom:0}
+  .section-title{
+    display:flex;align-items:baseline;gap:12px;margin-bottom:14px
+  }
+  .section-title .num{font-size:12px;color:var(--accent);font-weight:800;letter-spacing:.12em}
+  .section-title h3{font-size:23px}
+  .chips{display:flex;flex-wrap:wrap;gap:9px}
+  .chip{
+    display:inline-flex;padding:8px 12px;border:1px solid #b8aea5;
+    border-radius:999px;background:#faf7f1;font-size:14px
+  }
+  .answer{
+    font-size:17px;
+    max-width:780px;
+  }
+  .answer p{margin:0 0 16px}
+  .listen-row{
+    display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+    margin:0 0 20px;
+  }
+  .listen-btn{
+    appearance:none;border:0;border-radius:999px;
+    background:var(--accent);color:white;
+    padding:10px 16px;font:inherit;font-size:14px;font-weight:800;
+    letter-spacing:.02em;cursor:pointer;
+  }
+  .listen-btn:hover{background:var(--accent-dark)}
+  .listen-btn:active{transform:translateY(1px)}
+  .listen-note{font-size:13px;color:var(--muted)}
+  .phrase-list{display:grid;gap:12px}
+  .phrase{
+    display:grid;grid-template-columns:minmax(210px,1fr) 1.2fr;
+    gap:20px;padding:14px 0;border-top:1px solid #d6cec4
+  }
+  .phrase:first-child{border-top:0}
+  .phrase strong{font-size:15px}
+  .note{color:var(--muted);font-size:14px}
+  footer{
+    margin-top:54px;background:var(--accent);color:white;padding:28px;
+    display:flex;justify-content:space-between;gap:20px;align-items:end
+  }
+  footer b{letter-spacing:.08em}
+  footer span{font-size:13px;opacity:.85}
+  @media(max-width:680px){
+    .page{padding:22px 16px 48px}
+    .hero{padding:48px 0 38px}
+    .topline{font-size:11px}
+    .nav{grid-template-columns:1fr 1fr}
+    .nav a:nth-child(2){border-right:0}
+    .nav a:nth-child(-n+2){border-bottom:1px solid #bbb4aa}
+    .question-card{padding:22px 18px}
+    h2{font-size:25px}
+    .prompt{font-size:17px}
+    .answer{font-size:16px}
+    .phrase{grid-template-columns:1fr;gap:4px}
+    footer{align-items:start;flex-direction:column}
+  }
+</style>
+</head>
+<body>
+<main class="page">
+  <div class="topline">
+    <span>IELTS SPEAKING · STUDY NOTES</span>
+    <span>2026 / 10</span>
+  </div>
+
+  <header class="hero">
+    <div class="eyebrow">BAND 6.5–7 · PERSONAL PRACTICE</div>
+    <h1>口說<span class="accent">筆記</span></h1>
+    <div class="subtitle">把題目、自己的想法與可實際說出口的英文，整理成一份持續累積的 Speaking 題庫。</div>
+    <div class="meta">
+      <span>Part 2</span>
+      <span>Natural Beauty</span>
+      <span>Topic 01</span>
+    </div>
+  </header>
+
+  <nav class="nav" aria-label="頁面導覽">
+    <a href="#question">題目</a>
+    <a href="#keywords">關鍵字</a>
+    <a href="#answer">擬答</a>
+    <a href="#phrases">重要句型</a>
+  </nav>
+
+  <article class="question-card">
+    <span class="index">01 / NATURAL BEAUTY</span>
+
+    <section id="question" class="section">
+      <div class="section-title"><span class="num">01</span><h3>題目</h3></div>
+      <div class="prompt">Describe a place in your country that is famous for its natural beauty.</div>
+      <div class="cue">
+        <strong>You should say:</strong>
+        <ul>
+          <li>where that place is</li>
+          <li>what kind of place it is</li>
+          <li>what makes it beautiful</li>
+          <li>and explain why this place is famous in your country</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="keywords" class="section">
+      <div class="section-title"><span class="num">02</span><h3>關鍵字</h3></div>
+      <div class="chips">
+        <span class="chip">Alishan · Chiayi</span>
+        <span class="chip">mountain area</span>
+        <span class="chip">different elevations</span>
+        <span class="chip">wide variety of plants & trees</span>
+        <span class="chip">green forests</span>
+        <span class="chip">old cypress trees</span>
+        <span class="chip">sunrise</span>
+        <span class="chip">sea of clouds</span>
+        <span class="chip">golden light</span>
+        <span class="chip">Alishan Forest Railway</span>
+        <span class="chip">fresh mountain air</span>
+        <span class="chip">peaceful & relaxing</span>
+        <span class="chip">international tourists</span>
+      </div>
+    </section>
+
+    <section id="answer" class="section">
+      <div class="section-title"><span class="num">03</span><h3>Band 6.5–7 擬答</h3></div>
+      <div class="answer">
+        <div class="listen-row">
+          <button class="listen-btn" id="readAnswerBtn" type="button">▶ Read aloud · British English</button>
+          <span class="listen-note">Uses the closest available en-GB female voice on your device.</span>
+        </div>
+        <div id="answerText">
+        <p>I would like to talk about Alishan, a famous mountain area in Chiayi, Taiwan. It is one of the most popular places in Taiwan for people who want to enjoy natural scenery.</p>
+
+        <p>What I really like about Alishan is its wide variety of plants and trees. Because the mountains have different heights, the scenery gradually changes as people travel higher up. There are beautiful green forests and many old cypress trees, which make the whole area feel peaceful and relaxing.</p>
+
+        <p>When I visited Alishan, I had already heard a lot about its sunrise and the famous sea of clouds. However, the view was even more beautiful than I had expected. I had been looking forward to seeing it for a long time, so I got up very early in the morning. As the sun came up, the clouds slowly turned golden. It was definitely one of the most impressive views I had ever seen.</p>
+
+        <p>Another thing I really enjoyed was taking the famous Alishan Forest Railway. The little train took us through the forest, so I was able to enjoy the fresh mountain air and the beautiful natural environment along the way.</p>
+
+        <p>I think Alishan is famous because it has beautiful scenery, a peaceful atmosphere, and a unique railway experience. That is why it has become one of the places that both Taiwanese people and international tourists really want to visit.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="phrases" class="section">
+      <div class="section-title"><span class="num">04</span><h3>重要句型</h3></div>
+      <div class="phrase-list">
+        <div class="phrase">
+          <strong>What I really like about … is …</strong>
+          <span class="note">自然帶出「我最喜歡的特色是……」，很適合 Part 2 展開描述。</span>
+        </div>
+        <div class="phrase">
+          <strong>I had already heard a lot about …</strong>
+          <span class="note">過去完成式：到「實際去阿里山」之前，我已經聽過很多相關資訊。</span>
+        </div>
+        <div class="phrase">
+          <strong>… was even more beautiful than I had expected.</strong>
+          <span class="note">很實用的比較句，適合描述實際體驗超出預期。</span>
+        </div>
+        <div class="phrase">
+          <strong>I had been looking forward to …</strong>
+          <span class="note">過去完成進行式：強調某個期待在過去持續了一段時間。</span>
+        </div>
+        <div class="phrase">
+          <strong>As the sun came up, …</strong>
+          <span class="note">用 as 自然描述兩件同時發生的事情，讓敘述更連貫。</span>
+        </div>
+        <div class="phrase">
+          <strong>Another thing I really enjoyed was …</strong>
+          <span class="note">非常實用的延伸句型，用來加入第二個體驗或亮點。</span>
+        </div>
+        <div class="phrase">
+          <strong>That is why …</strong>
+          <span class="note">完整形式的原因總結句，適合收尾回答「為什麼有名」，並符合這份筆記不使用縮寫的練習原則。</span>
+        </div>
+      </div>
+    </section>
+  </article>
+
+  <footer>
+    <b>IELTS SPEAKING NOTES</b>
+    <span>Topic 01 · Alishan, Taiwan</span>
+  </footer>
+</main>
+
+<script>
+(function () {
+  const btn = document.getElementById('readAnswerBtn');
+  const answerText = document.getElementById('answerText');
+
+  function getBritishFemaleVoice() {
+    const voices = window.speechSynthesis.getVoices();
+
+    // Prefer common British English female voices when available.
+    const preferredNames = [
+      'Serena', 'Samantha', 'Martha', 'Kate', 'Stephanie',
+      'Google UK English Female', 'Microsoft Sonia Online',
+      'Microsoft Libby Online'
+    ];
+
+    for (const name of preferredNames) {
+      const found = voices.find(v =>
+        v.lang && v.lang.toLowerCase().startsWith('en-gb') &&
+        v.name.toLowerCase().includes(name.toLowerCase())
+      );
+      if (found) return found;
+    }
+
+    // Otherwise choose any British English voice that looks female by name.
+    const femaleHints = ['female', 'serena', 'martha', 'kate', 'sonia', 'libby', 'susan', 'fiona', 'victoria'];
+    const femaleGB = voices.find(v =>
+      v.lang && v.lang.toLowerCase().startsWith('en-gb') &&
+      femaleHints.some(h => v.name.toLowerCase().includes(h))
+    );
+    if (femaleGB) return femaleGB;
+
+    // Final fallback: any en-GB voice.
+    return voices.find(v => v.lang && v.lang.toLowerCase().startsWith('en-gb')) || null;
+  }
+
+  function speakAnswer() {
+    if (!('speechSynthesis' in window)) {
+      alert('Speech playback is not supported in this browser.');
+      return;
+    }
+
+    if (window.speechSynthesis.speaking) {
+      window.speechSynthesis.cancel();
+      btn.textContent = '▶ Read aloud · British English';
+      return;
+    }
+
+    const text = answerText.innerText.replace(/\s+/g, ' ').trim();
+    const utterance = new SpeechSynthesisUtterance(text);
+    const voice = getBritishFemaleVoice();
+
+    if (voice) utterance.voice = voice;
+    utterance.lang = 'en-GB';
+    utterance.rate = 0.88;
+    utterance.pitch = 0.92;
+    utterance.volume = 1;
+
+    utterance.onstart = () => {
+      btn.textContent = '■ Stop reading';
+    };
+    utterance.onend = () => {
+      btn.textContent = '▶ Read aloud · British English';
+    };
+    utterance.onerror = () => {
+      btn.textContent = '▶ Read aloud · British English';
+    };
+
+    window.speechSynthesis.speak(utterance);
+  }
+
+  btn.addEventListener('click', speakAnswer);
+
+  // Some browsers load voices asynchronously.
+  window.speechSynthesis.onvoiceschanged = function () {
+    window.speechSynthesis.getVoices();
+  };
+})();
+</script>
+
+</body>
+</html>
