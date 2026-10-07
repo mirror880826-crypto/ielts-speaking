@@ -41,7 +41,6 @@
     font-weight:900;
   }
   h1 .accent{color:var(--accent)}
-  .subtitle{font-size:21px;color:#5d5956;max-width:650px}
   .meta{
     display:flex;flex-wrap:wrap;gap:10px 18px;margin-top:24px;
     font-size:14px;color:var(--muted)
@@ -95,7 +94,7 @@
   }
   .answer p{margin:0 0 16px}
   .listen-row{
-    display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+    display:flex;align-items:center;
     margin:0 0 20px;
   }
   .listen-btn{
@@ -106,7 +105,6 @@
   }
   .listen-btn:hover{background:var(--accent-dark)}
   .listen-btn:active{transform:translateY(1px)}
-  .listen-note{font-size:13px;color:var(--muted)}
   .phrase-list{display:grid;gap:12px}
   .phrase{
     display:grid;grid-template-columns:minmax(210px,1fr) 1.2fr;
@@ -147,7 +145,6 @@
   <header class="hero">
     <div class="eyebrow">BAND 6.5–7 · PERSONAL PRACTICE</div>
     <h1>口說<span class="accent">筆記</span></h1>
-    <div class="subtitle">把題目、自己的想法與可實際說出口的英文，整理成一份持續累積的 Speaking 題庫。</div>
     <div class="meta">
       <span>Part 2</span>
       <span>Natural Beauty</span>
@@ -204,8 +201,7 @@
       <div class="section-title"><span class="num">03</span><h3>Band 6.5–7 擬答</h3></div>
       <div class="answer">
         <div class="listen-row">
-          <button class="listen-btn" id="readAnswerBtn" type="button">▶ Read aloud · British English</button>
-          <span class="listen-note">Uses the closest available en-GB female voice on your device.</span>
+          <button class="listen-btn" id="readAnswerBtn" type="button">▶ Read aloud</button>
         </div>
         <div id="answerText">
         <p>I would like to talk about Alishan, a famous mountain area in Chiayi, Taiwan. It is a very popular place for people who enjoy natural scenery and mountain views.</p>
@@ -285,8 +281,6 @@
 
   function getBritishFemaleVoice() {
     const voices = window.speechSynthesis.getVoices();
-
-    // Prefer common British English female voices when available.
     const preferredNames = [
       'Serena', 'Samantha', 'Martha', 'Kate', 'Stephanie',
       'Google UK English Female', 'Microsoft Sonia Online',
@@ -301,7 +295,6 @@
       if (found) return found;
     }
 
-    // Otherwise choose any British English voice that looks female by name.
     const femaleHints = ['female', 'serena', 'martha', 'kate', 'sonia', 'libby', 'susan', 'fiona', 'victoria'];
     const femaleGB = voices.find(v =>
       v.lang && v.lang.toLowerCase().startsWith('en-gb') &&
@@ -309,7 +302,6 @@
     );
     if (femaleGB) return femaleGB;
 
-    // Final fallback: any en-GB voice.
     return voices.find(v => v.lang && v.lang.toLowerCase().startsWith('en-gb')) || null;
   }
 
@@ -321,7 +313,7 @@
 
     if (window.speechSynthesis.speaking) {
       window.speechSynthesis.cancel();
-      btn.textContent = '▶ Read aloud · British English';
+      btn.textContent = '▶ Read aloud';
       return;
     }
 
@@ -336,13 +328,13 @@
     utterance.volume = 1;
 
     utterance.onstart = () => {
-      btn.textContent = '■ Stop reading';
+      btn.textContent = '■ Stop';
     };
     utterance.onend = () => {
-      btn.textContent = '▶ Read aloud · British English';
+      btn.textContent = '▶ Read aloud';
     };
     utterance.onerror = () => {
-      btn.textContent = '▶ Read aloud · British English';
+      btn.textContent = '▶ Read aloud';
     };
 
     window.speechSynthesis.speak(utterance);
@@ -350,7 +342,6 @@
 
   btn.addEventListener('click', speakAnswer);
 
-  // Some browsers load voices asynchronously.
   window.speechSynthesis.onvoiceschanged = function () {
     window.speechSynthesis.getVoices();
   };
