@@ -27,16 +27,17 @@
     font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Microsoft JhengHei","Segoe UI",sans-serif;
     line-height:1.72;
   }
+  button,input,select{font:inherit}
   .page{max-width:980px;margin:auto;padding:34px 24px 72px}
   .topline{
     display:flex;justify-content:space-between;align-items:center;
     gap:18px;padding-bottom:14px;border-bottom:2px solid var(--line);
     color:var(--muted);font-size:13px;letter-spacing:.12em
   }
-  .hero{padding:70px 0 56px}
+  .hero{padding:70px 0 44px}
   h1{
     font-size:clamp(54px,10vw,112px);
-    line-height:.9;margin:14px 0 18px;letter-spacing:-.06em;
+    line-height:.9;margin:0 0 18px;letter-spacing:-.06em;
     font-weight:900;
   }
   h1 .accent{color:var(--accent)}
@@ -44,26 +45,81 @@
     display:flex;flex-wrap:wrap;gap:10px 18px;margin-top:24px;
     font-size:14px;color:var(--muted)
   }
-  .nav{
-    display:grid;grid-template-columns:repeat(2,1fr);
-    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
-    margin-bottom:44px
+
+  .library{
+    background:var(--white);
+    border-top:10px solid var(--accent);
+    padding:26px;
+    box-shadow:0 9px 30px rgba(40,37,34,.06);
+    margin-bottom:34px;
   }
-  .nav a{
-    padding:14px 10px;color:var(--ink);text-decoration:none;text-align:center;
-    font-weight:700;font-size:14px;border-right:1px solid #bbb4aa
+  .library-title{
+    display:flex;justify-content:space-between;align-items:end;
+    gap:18px;margin-bottom:18px
   }
-  .nav a:last-child{border-right:0}
+  .library-title h2{font-size:25px;margin:0}
+  .library-count{font-size:13px;color:var(--muted)}
+  .controls{
+    display:grid;
+    grid-template-columns:1fr 1.3fr;
+    gap:12px;
+  }
+  .control{display:grid;gap:6px}
+  .control label{
+    font-size:12px;font-weight:800;letter-spacing:.1em;color:var(--muted)
+  }
+  select,input{
+    width:100%;
+    border:1px solid #b8aea5;
+    border-radius:12px;
+    background:#fffdf8;
+    color:var(--ink);
+    padding:12px 14px;
+    outline:none;
+  }
+  select:focus,input:focus{border-color:var(--accent)}
+  .search-row{
+    display:grid;grid-template-columns:1fr auto;
+    gap:10px;margin-top:12px
+  }
+  .clear-btn{
+    border:1px solid #b8aea5;border-radius:12px;background:transparent;
+    padding:0 15px;color:var(--ink);cursor:pointer;font-weight:700
+  }
+  .clear-btn:hover{border-color:var(--accent)}
+  .results{
+    display:grid;gap:10px;margin-top:16px
+  }
+  .result-card{
+    width:100%;text-align:left;border:1px solid #d6cec4;
+    background:#faf7f1;padding:14px 16px;border-radius:12px;
+    cursor:pointer;color:var(--ink)
+  }
+  .result-card:hover{border-color:var(--accent)}
+  .result-card strong{display:block;font-size:15px;margin-bottom:3px}
+  .result-meta{font-size:12px;color:var(--accent-dark);font-weight:800;letter-spacing:.06em}
+  .empty{
+    padding:14px 0;color:var(--muted);font-size:14px
+  }
+
   .question-card{
     border-top:10px solid var(--accent);
     background:var(--white);
     padding:30px;
     box-shadow:0 9px 30px rgba(40,37,34,.06);
   }
-  .question-card + .question-card{margin-top:44px}
+  .topic-head{
+    display:flex;justify-content:space-between;align-items:start;
+    gap:18px;margin-bottom:10px
+  }
   .index{
     display:inline-block;color:var(--accent);font-weight:800;letter-spacing:.14em;
-    margin-bottom:8px;font-size:13px
+    font-size:13px
+  }
+  .tags{display:flex;flex-wrap:wrap;gap:7px;justify-content:flex-end}
+  .tag{
+    border:1px solid #c8c1b8;border-radius:999px;
+    padding:4px 9px;font-size:12px;color:var(--muted);background:#faf7f1
   }
   h2{font-size:30px;line-height:1.25;margin:0 0 14px;letter-spacing:-.02em}
   h3{font-size:18px;margin:0 0 12px}
@@ -73,7 +129,6 @@
     border-left:4px solid var(--accent)
   }
   .cue ul{margin:6px 0 0;padding-left:21px}
-  section{scroll-margin-top:20px}
   .section{
     padding:34px 0;border-bottom:1px solid #c8c1b8
   }
@@ -88,10 +143,7 @@
     display:inline-flex;padding:8px 12px;border:1px solid #b8aea5;
     border-radius:999px;background:#faf7f1;font-size:14px
   }
-  .answer{
-    font-size:17px;
-    max-width:780px;
-  }
+  .answer{font-size:17px;max-width:780px}
   .answer p{margin:0 0 16px}
   .listen-row{
     display:flex;align-items:center;
@@ -100,7 +152,7 @@
   .listen-btn{
     appearance:none;border:0;border-radius:999px;
     background:var(--accent);color:white;
-    padding:10px 16px;font:inherit;font-size:14px;font-weight:800;
+    padding:10px 16px;font-size:14px;font-weight:800;
     letter-spacing:.02em;cursor:pointer;
   }
   .listen-btn:hover{background:var(--accent-dark)}
@@ -119,12 +171,19 @@
   }
   footer b{letter-spacing:.08em}
   footer span{font-size:13px;opacity:.85}
+
   @media(max-width:680px){
     .page{padding:22px 16px 48px}
-    .hero{padding:48px 0 38px}
+    .hero{padding:48px 0 34px}
     .topline{font-size:11px}
-    .nav{grid-template-columns:1fr 1fr}
+    .library{padding:20px 18px}
+    .library-title{align-items:start;flex-direction:column;gap:4px}
+    .controls{grid-template-columns:1fr}
+    .search-row{grid-template-columns:1fr}
+    .clear-btn{padding:10px 14px}
     .question-card{padding:22px 18px}
+    .topic-head{flex-direction:column;gap:10px}
+    .tags{justify-content:flex-start}
     h2{font-size:25px}
     .prompt{font-size:17px}
     .answer{font-size:16px}
@@ -144,308 +203,380 @@
     <h1>SPEAKING <span class="accent">PRACTICE</span></h1>
     <div class="meta">
       <span>IELTS Speaking Part 2</span>
-      <span>Topic 01–02</span>
+      <span id="topicCount">2 topics</span>
     </div>
   </header>
 
-  <nav class="nav" aria-label="題目導覽">
-    <a href="#topic-01">Topic 01 · Alishan</a>
-    <a href="#topic-02">Topic 02 · Parasite</a>
-  </nav>
+  <section class="library" aria-label="題庫">
+    <div class="library-title">
+      <h2>題庫</h2>
+      <span class="library-count" id="libraryCount">2 題</span>
+    </div>
 
-  <article class="question-card" id="topic-01">
-    <span class="index">01 / NATURAL BEAUTY</span>
-
-    <section id="question" class="section">
-      <div class="section-title"><span class="num">01</span><h3>題目</h3></div>
-      <div class="prompt">Describe a place in your country that is famous for its natural beauty.</div>
-      <div class="cue">
-        <strong>You should say:</strong>
-        <ul>
-          <li>where that place is</li>
-          <li>what kind of place it is</li>
-          <li>what makes it beautiful</li>
-          <li>and explain why this place is famous in your country</li>
-        </ul>
+    <div class="controls">
+      <div class="control">
+        <label for="categorySelect">CATEGORY</label>
+        <select id="categorySelect"></select>
       </div>
-    </section>
-
-    <section id="keywords" class="section">
-      <div class="section-title"><span class="num">02</span><h3>關鍵字</h3></div>
-      <div class="chips">
-        <span class="chip">Alishan · Chiayi</span>
-        <span class="chip">mountain area</span>
-        <span class="chip">altitude increases</span>
-        <span class="chip">wide variety of plants & trees</span>
-        <span class="chip">huge old trees</span>
-        <span class="chip">sunrise</span>
-        <span class="chip">sea of clouds</span>
-        <span class="chip">Alishan Forest Railway</span>
-        <span class="chip">fresh mountain air</span>
-        <span class="chip">peaceful atmosphere</span>
+      <div class="control">
+        <label for="questionSelect">QUESTION</label>
+        <select id="questionSelect"></select>
       </div>
-    </section>
+    </div>
 
-    <section id="answer" class="section">
-      <div class="section-title"><span class="num">03</span><h3>擬答</h3></div>
-      <div class="answer">
-        <div class="listen-row">
-          <button class="listen-btn" type="button" data-target="answerText01">▶ Read aloud</button>
-        </div>
-        <div id="answerText01">
-        <p>I would like to talk about Alishan, a famous mountain area in Chiayi, Taiwan. It is a very popular place for people who enjoy natural scenery and mountain views.</p>
+    <div class="search-row">
+      <input id="searchInput" type="search" placeholder="搜尋題目、分類、標籤、關鍵字或重要句型…" autocomplete="off" />
+      <button class="clear-btn" id="clearSearch" type="button">清除搜尋</button>
+    </div>
 
-        <p>What I really like about Alishan is its wide variety of plants and trees. One interesting feature is that the scenery gradually changes as the altitude increases. There are beautiful green forests and many huge old trees, which give the whole area a peaceful and relaxing atmosphere.</p>
+    <div class="results" id="searchResults" hidden></div>
+  </section>
 
-        <p>When I visited Alishan, I had already heard a lot about its sunrise and the famous sea of clouds. However, the view was even more beautiful than I had expected. I had been looking forward to seeing it for a long time, so I got up very early in the morning. As the sun slowly came up, the clouds below gradually turned golden. It was definitely one of the most impressive views I had ever seen.</p>
-
-        <p>Another thing I really enjoyed was taking the famous Alishan Forest Railway. The little train went through the forest, and along the way, I could enjoy the fresh mountain air and the forest scenery around me.</p>
-
-        <p>I think Alishan is famous because it offers beautiful scenery, a peaceful atmosphere, and a unique railway experience all in one place. That is why it has become one of the most popular destinations for both Taiwanese people and international tourists.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="phrases" class="section">
-      <div class="section-title"><span class="num">04</span><h3>重要句型</h3></div>
-      <div class="phrase-list">
-        <div class="phrase">
-          <strong>It is a very popular place for people who …</strong>
-          <span class="note">簡單自然地介紹「這是一個很受某類人歡迎的地方」，比直接用 be popular with 更好說出口。</span>
-        </div>
-        <div class="phrase">
-          <strong>What I really like about … is …</strong>
-          <span class="note">自然帶出「我最喜歡的特色是……」，很適合 Part 2 展開描述。</span>
-        </div>
-        <div class="phrase">
-          <strong>One interesting feature is that …</strong>
-          <span class="note">用 that 子句介紹特色，可以增加句型變化，又不需要使用困難單字。</span>
-        </div>
-        <div class="phrase">
-          <strong>… gradually changes as the altitude increases.</strong>
-          <span class="note">用 as 表示「隨著……」，很適合描述環境、景色或情況逐漸改變。</span>
-        </div>
-        <div class="phrase">
-          <strong>…, which give the whole area a … atmosphere.</strong>
-          <span class="note">which 關係子句可用來補充前面事物帶來的效果，讓描述更完整。</span>
-        </div>
-        <div class="phrase">
-          <strong>I had already heard a lot about …</strong>
-          <span class="note">過去完成式：到「實際去阿里山」之前，我已經聽過很多相關資訊。</span>
-        </div>
-        <div class="phrase">
-          <strong>… was even more beautiful than I had expected.</strong>
-          <span class="note">比較級搭配過去完成式，適合描述實際體驗超出原本預期。</span>
-        </div>
-        <div class="phrase">
-          <strong>I had been looking forward to …</strong>
-          <span class="note">過去完成進行式：強調某個期待在過去持續了一段時間。</span>
-        </div>
-        <div class="phrase">
-          <strong>Another thing I really enjoyed was …</strong>
-          <span class="note">非常實用的延伸句型，用來加入第二個體驗或亮點。</span>
-        </div>
-        <div class="phrase">
-          <strong>… offers … all in one place.</strong>
-          <span class="note">用 offers 取代 has，搭配 all in one place，能讓總結更自然也更有層次。</span>
-        </div>
-        <div class="phrase">
-          <strong>That is why …</strong>
-          <span class="note">完整形式的原因總結句，適合收尾，也符合這份筆記不使用縮寫的練習原則。</span>
-        </div>
-      </div>
-    </section>
-  </article>
-
-
-  <article class="question-card" id="topic-02">
-    <span class="index">02 / FILM</span>
-
-    <section id="question-02" class="section">
-      <div class="section-title"><span class="num">01</span><h3>題目</h3></div>
-      <div class="prompt">Describe a film you found interesting.</div>
-      <div class="cue">
-        <strong>You should say:</strong>
-        <ul>
-          <li>when you saw this film</li>
-          <li>why you decided to see this film</li>
-          <li>what happened in the film</li>
-          <li>and explain why you found this film interesting</li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="keywords-02" class="section">
-      <div class="section-title"><span class="num">02</span><h3>關鍵字</h3></div>
-      <div class="chips">
-        <span class="chip">Parasite</span>
-        <span class="chip">Korean film</span>
-        <span class="chip">a lot of buzz</span>
-        <span class="chip">poor family</span>
-        <span class="chip">make ends meet</span>
-        <span class="chip">wealthy family</span>
-        <span class="chip">secure jobs</span>
-        <span class="chip">infiltrate a wealthy household</span>
-        <span class="chip">rich and poor</span>
-        <span class="chip">makes me think</span>
-      </div>
-    </section>
-
-    <section id="answer-02" class="section">
-      <div class="section-title"><span class="num">03</span><h3>擬答</h3></div>
-      <div class="answer">
-        <div class="listen-row">
-          <button class="listen-btn" type="button" data-target="answerText02">▶ Read aloud</button>
-        </div>
-        <div id="answerText02">
-          <p>I remember watching the Korean film <em>Parasite</em> a few years ago, mainly because of all the buzz it had generated overseas. There had been so much discussion about it that I became curious and decided to watch it. In the end, I felt that all the buzz was definitely worth it because the film was extraordinary.</p>
-
-          <p>The story follows a poor family living in a low-income area of Seoul, South Korea. There are four members in the family: a mother, a father, and their two children, a son and a daughter. They struggle to make ends meet and even fold pizza boxes to earn some extra money just to survive.</p>
-
-          <p>Their lives begin to change when the son gets an opportunity to work as a private tutor for the daughter of a wealthy family. This opens the door for the other members of his family to secure jobs working for the same household. The film essentially follows this poor family as they infiltrate a wealthy household, doing everything they can to work for them and make money.</p>
-
-          <p>What I find especially interesting about this film is the way it shows the huge difference between rich and poor people. It is not only about life in Korea, but also about society in general. I think the film gives a powerful picture of modern society and reminds people to appreciate what they have, while also showing how difficult life can be for people who are less fortunate.</p>
-
-          <p>For these reasons, I think <em>Parasite</em> is a fantastic film. I have watched it more than five times, and I still enjoy it every time. Whenever I watch it again, I notice something new. It is the kind of film that really makes me think.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="phrases-02" class="section">
-      <div class="section-title"><span class="num">04</span><h3>重要句型</h3></div>
-      <div class="phrase-list">
-        <div class="phrase">
-          <strong>I remember watching … a few years ago.</strong>
-          <span class="note">自然地交代過去的觀影經驗，也可以直接回答 when you saw this film。</span>
-        </div>
-        <div class="phrase">
-          <strong>There had been so much discussion about it that …</strong>
-          <span class="note">使用過去完成式搭配 so … that …，表達「在我看之前已經有很多討論，因此我……」。</span>
-        </div>
-        <div class="phrase">
-          <strong>all the buzz was definitely worth it</strong>
-          <span class="note"><b>buzz</b> 在這裡指話題度、熱度或大量討論。常見搭配有 a lot of buzz、generate buzz、create buzz。</span>
-        </div>
-        <div class="phrase">
-          <strong>struggle to make ends meet</strong>
-          <span class="note"><b>make ends meet</b> 是固定片語，意思是「勉強維持生計、讓收支打平」。struggle to make ends meet 表示經濟上過得很辛苦。</span>
-        </div>
-        <div class="phrase">
-          <strong>This opens the door for … to …</strong>
-          <span class="note">表示某件事為後續「創造機會」，很適合描述故事如何一步一步發展。</span>
-        </div>
-        <div class="phrase">
-          <strong>secure jobs working for the same household</strong>
-          <span class="note">secure 在這裡是「成功取得」的意思；secure a job 比 get a job 稍正式，但在這段情境很自然。</span>
-        </div>
-        <div class="phrase">
-          <strong>as they infiltrate a wealthy household</strong>
-          <span class="note"><b>infiltrate</b> 指「滲透、逐步潛入某個群體或組織」，帶有不是單純公開進入的語感，很貼合這部電影的情節。</span>
-        </div>
-        <div class="phrase">
-          <strong>What I find especially interesting about this film is …</strong>
-          <span class="note">直接回答「為什麼覺得這部電影有趣」，很適合進入 Part 2 最後的評價段落。</span>
-        </div>
-        <div class="phrase">
-          <strong>It is not only about …, but also about …</strong>
-          <span class="note">把觀點從單一故事延伸到更大的社會層次，句型簡單但很實用。</span>
-        </div>
-        <div class="phrase">
-          <strong>Whenever I watch it again, I notice something new.</strong>
-          <span class="note">用 whenever 表達「每次……都……」，也讓重看多次這個個人細節更自然。</span>
-        </div>
-        <div class="phrase">
-          <strong>It is the kind of film that really makes me think.</strong>
-          <span class="note">很適合電影題的自然收尾，簡單但能清楚表達這部電影帶來的思考。</span>
-        </div>
-      </div>
-    </section>
-  </article>
+  <article class="question-card" id="topicView" aria-live="polite"></article>
 
   <footer>
     <b>IELTS SPEAKING NOTES</b>
-    <span>Topic 01 · Alishan · Topic 02 · Parasite</span>
+    <span id="footerTopic"></span>
   </footer>
 </main>
 
 <script>
-(function () {
-  function getBritishFemaleVoice() {
-    const voices = window.speechSynthesis.getVoices();
-    const preferredNames = [
-      'Serena', 'Samantha', 'Martha', 'Kate', 'Stephanie',
-      'Google UK English Female', 'Microsoft Sonia Online',
-      'Microsoft Libby Online'
-    ];
+const TOPICS = [
+  {
+    id: "PLACE-001",
+    category: "Place",
+    tags: ["Natural Beauty", "Mountain", "Travel"],
+    question: "Describe a place in your country that is famous for its natural beauty.",
+    cuePoints: [
+      "where that place is",
+      "what kind of place it is",
+      "what makes it beautiful",
+      "and explain why this place is famous in your country"
+    ],
+    keywords: [
+      "Alishan · Chiayi",
+      "mountain area",
+      "altitude increases",
+      "wide variety of plants & trees",
+      "huge old trees",
+      "sunrise",
+      "sea of clouds",
+      "Alishan Forest Railway",
+      "fresh mountain air",
+      "peaceful atmosphere"
+    ],
+    answer: [
+      "I would like to talk about Alishan, a famous mountain area in Chiayi, Taiwan. It is a very popular place for people who enjoy natural scenery and mountain views.",
+      "What I really like about Alishan is its wide variety of plants and trees. One interesting feature is that the scenery gradually changes as the altitude increases. There are beautiful green forests and many huge old trees, which give the whole area a peaceful and relaxing atmosphere.",
+      "When I visited Alishan, I had already heard a lot about its sunrise and the famous sea of clouds. However, the view was even more beautiful than I had expected. I had been looking forward to seeing it for a long time, so I got up very early in the morning. As the sun slowly came up, the clouds below gradually turned golden. It was definitely one of the most impressive views I had ever seen.",
+      "Another thing I really enjoyed was taking the famous Alishan Forest Railway. The little train went through the forest, and along the way, I could enjoy the fresh mountain air and the forest scenery around me.",
+      "I think Alishan is famous because it offers beautiful scenery, a peaceful atmosphere, and a unique railway experience all in one place. That is why it has become one of the most popular destinations for both Taiwanese people and international tourists."
+    ],
+    phrases: [
+      ["It is a very popular place for people who …","簡單自然地介紹「這是一個很受某類人歡迎的地方」，比直接用 be popular with 更好說出口。"],
+      ["What I really like about … is …","自然帶出「我最喜歡的特色是……」，很適合 Part 2 展開描述。"],
+      ["One interesting feature is that …","用 that 子句介紹特色，可以增加句型變化，又不需要使用困難單字。"],
+      ["… gradually changes as the altitude increases.","用 as 表示「隨著……」，很適合描述環境、景色或情況逐漸改變。"],
+      ["…, which give the whole area a … atmosphere.","which 關係子句可用來補充前面事物帶來的效果，讓描述更完整。"],
+      ["I had already heard a lot about …","過去完成式：到「實際去阿里山」之前，我已經聽過很多相關資訊。"],
+      ["… was even more beautiful than I had expected.","比較級搭配過去完成式，適合描述實際體驗超出原本預期。"],
+      ["I had been looking forward to …","過去完成進行式：強調某個期待在過去持續了一段時間。"],
+      ["Another thing I really enjoyed was …","非常實用的延伸句型，用來加入第二個體驗或亮點。"],
+      ["… offers … all in one place.","用 offers 取代 has，搭配 all in one place，能讓總結更自然也更有層次。"],
+      ["That is why …","完整形式的原因總結句，適合收尾，也符合這份筆記不使用縮寫的練習原則。"]
+    ]
+  },
+  {
+    id: "MEDIA-001",
+    category: "Media",
+    tags: ["Film", "Society", "Korea"],
+    question: "Describe a film you found interesting.",
+    cuePoints: [
+      "when you saw this film",
+      "why you decided to see this film",
+      "what happened in the film",
+      "and explain why you found this film interesting"
+    ],
+    keywords: [
+      "Parasite",
+      "Korean film",
+      "a lot of buzz",
+      "poor family",
+      "make ends meet",
+      "wealthy family",
+      "secure jobs",
+      "infiltrate a wealthy household",
+      "rich and poor",
+      "makes me think"
+    ],
+    answer: [
+      "I remember watching the Korean film <em>Parasite</em> a few years ago, mainly because of all the buzz it had generated overseas. There had been so much discussion about it that I became curious and decided to watch it. In the end, I felt that all the buzz was definitely worth it because the film was extraordinary.",
+      "The story follows a poor family living in a low-income area of Seoul, South Korea. There are four members in the family: a mother, a father, and their two children, a son and a daughter. They struggle to make ends meet and even fold pizza boxes to earn some extra money just to survive.",
+      "Their lives begin to change when the son gets an opportunity to work as a private tutor for the daughter of a wealthy family. This opens the door for the other members of his family to secure jobs working for the same household. The film essentially follows this poor family as they infiltrate a wealthy household, doing everything they can to work for them and make money.",
+      "What I find especially interesting about this film is the way it shows the huge difference between rich and poor people. It is not only about life in Korea, but also about society in general. I think the film gives a powerful picture of modern society and reminds people to appreciate what they have, while also showing how difficult life can be for people who are less fortunate.",
+      "For these reasons, I think <em>Parasite</em> is a fantastic film. I have watched it more than five times, and I still enjoy it every time. Whenever I watch it again, I notice something new. It is the kind of film that really makes me think."
+    ],
+    phrases: [
+      ["I remember watching … a few years ago.","自然地交代過去的觀影經驗，也可以直接回答 when you saw this film。"],
+      ["There had been so much discussion about it that …","使用過去完成式搭配 so … that …，表達「在我看之前已經有很多討論，因此我……」。"],
+      ["all the buzz was definitely worth it","<b>buzz</b> 在這裡指話題度、熱度或大量討論。常見搭配有 a lot of buzz、generate buzz、create buzz。"],
+      ["struggle to make ends meet","<b>make ends meet</b> 是固定片語，意思是「勉強維持生計、讓收支打平」。struggle to make ends meet 表示經濟上過得很辛苦。"],
+      ["This opens the door for … to …","表示某件事為後續「創造機會」，很適合描述故事如何一步一步發展。"],
+      ["secure jobs working for the same household","secure 在這裡是「成功取得」的意思；secure a job 比 get a job 稍正式，但在這段情境很自然。"],
+      ["as they infiltrate a wealthy household","<b>infiltrate</b> 指「滲透、逐步潛入某個群體或組織」，帶有不是單純公開進入的語感，很貼合這部電影的情節。"],
+      ["What I find especially interesting about this film is …","直接回答「為什麼覺得這部電影有趣」，很適合進入 Part 2 最後的評價段落。"],
+      ["It is not only about …, but also about …","把觀點從單一故事延伸到更大的社會層次，句型簡單但很實用。"],
+      ["Whenever I watch it again, I notice something new.","用 whenever 表達「每次……都……」，也讓重看多次這個個人細節更自然。"],
+      ["It is the kind of film that really makes me think.","很適合電影題的自然收尾，簡單但能清楚表達這部電影帶來的思考。"]
+    ]
+  }
+];
 
-    for (const name of preferredNames) {
-      const found = voices.find(v =>
-        v.lang && v.lang.toLowerCase().startsWith('en-gb') &&
-        v.name.toLowerCase().includes(name.toLowerCase())
-      );
-      if (found) return found;
-    }
+const categorySelect = document.getElementById("categorySelect");
+const questionSelect = document.getElementById("questionSelect");
+const searchInput = document.getElementById("searchInput");
+const searchResults = document.getElementById("searchResults");
+const clearSearch = document.getElementById("clearSearch");
+const topicView = document.getElementById("topicView");
+const footerTopic = document.getElementById("footerTopic");
+const topicCount = document.getElementById("topicCount");
+const libraryCount = document.getElementById("libraryCount");
 
-    const femaleHints = ['female', 'serena', 'martha', 'kate', 'sonia', 'libby', 'susan', 'fiona', 'victoria'];
-    const femaleGB = voices.find(v =>
-      v.lang && v.lang.toLowerCase().startsWith('en-gb') &&
-      femaleHints.some(h => v.name.toLowerCase().includes(h))
-    );
-    if (femaleGB) return femaleGB;
+let activeId = TOPICS[0].id;
 
-    return voices.find(v => v.lang && v.lang.toLowerCase().startsWith('en-gb')) || null;
+function stripHtml(text) {
+  const div = document.createElement("div");
+  div.innerHTML = text;
+  return div.textContent || div.innerText || "";
+}
+
+function escapeHtml(text) {
+  return String(text)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+function buildSearchText(topic) {
+  return [
+    topic.id,
+    topic.category,
+    ...topic.tags,
+    topic.question,
+    ...topic.cuePoints,
+    ...topic.keywords,
+    ...topic.answer.map(stripHtml),
+    ...topic.phrases.flat().map(stripHtml)
+  ].join(" ").toLowerCase();
+}
+
+function populateCategories() {
+  const categories = [...new Set(TOPICS.map(t => t.category))].sort();
+  categorySelect.innerHTML =
+    '<option value="ALL">All categories</option>' +
+    categories.map(c => '<option value="' + escapeHtml(c) + '">' + escapeHtml(c) + '</option>').join("");
+}
+
+function getTopicsForSelectedCategory() {
+  const category = categorySelect.value;
+  return category === "ALL" ? TOPICS : TOPICS.filter(t => t.category === category);
+}
+
+function populateQuestions(preferredId) {
+  const topics = getTopicsForSelectedCategory();
+  questionSelect.innerHTML = topics.map(t =>
+    '<option value="' + t.id + '">' + t.id + ' · ' + escapeHtml(t.question) + '</option>'
+  ).join("");
+
+  const validPreferred = topics.some(t => t.id === preferredId);
+  const nextId = validPreferred ? preferredId : (topics[0] ? topics[0].id : TOPICS[0].id);
+  questionSelect.value = nextId;
+  activeId = nextId;
+}
+
+function renderTopic(id, updateHash = true) {
+  const topic = TOPICS.find(t => t.id === id) || TOPICS[0];
+  activeId = topic.id;
+
+  const tagsHtml = topic.tags.map(tag => '<span class="tag">' + escapeHtml(tag) + '</span>').join("");
+  const cueHtml = topic.cuePoints.map(point => '<li>' + escapeHtml(point) + '</li>').join("");
+  const keywordHtml = topic.keywords.map(keyword => '<span class="chip">' + escapeHtml(keyword) + '</span>').join("");
+  const answerHtml = topic.answer.map(paragraph => '<p>' + paragraph + '</p>').join("");
+  const phraseHtml = topic.phrases.map(([phrase,note]) =>
+    '<div class="phrase"><strong>' + phrase + '</strong><span class="note">' + note + '</span></div>'
+  ).join("");
+
+  topicView.innerHTML =
+    '<div class="topic-head">' +
+      '<span class="index">' + escapeHtml(topic.id) + ' / ' + escapeHtml(topic.category.toUpperCase()) + '</span>' +
+      '<div class="tags">' + tagsHtml + '</div>' +
+    '</div>' +
+
+    '<section class="section">' +
+      '<div class="section-title"><span class="num">01</span><h3>題目</h3></div>' +
+      '<div class="prompt">' + escapeHtml(topic.question) + '</div>' +
+      '<div class="cue"><strong>You should say:</strong><ul>' + cueHtml + '</ul></div>' +
+    '</section>' +
+
+    '<section class="section">' +
+      '<div class="section-title"><span class="num">02</span><h3>關鍵字</h3></div>' +
+      '<div class="chips">' + keywordHtml + '</div>' +
+    '</section>' +
+
+    '<section class="section">' +
+      '<div class="section-title"><span class="num">03</span><h3>擬答</h3></div>' +
+      '<div class="answer">' +
+        '<div class="listen-row"><button class="listen-btn" id="readAnswerBtn" type="button">▶ Read aloud</button></div>' +
+        '<div id="answerText">' + answerHtml + '</div>' +
+      '</div>' +
+    '</section>' +
+
+    '<section class="section">' +
+      '<div class="section-title"><span class="num">04</span><h3>重要句型</h3></div>' +
+      '<div class="phrase-list">' + phraseHtml + '</div>' +
+    '</section>';
+
+  footerTopic.textContent = topic.id + " · " + topic.category;
+  questionSelect.value = topic.id;
+  categorySelect.value = topic.category;
+
+  document.getElementById("readAnswerBtn").addEventListener("click", speakCurrentAnswer);
+
+  if (updateHash) {
+    history.replaceState(null, "", "#" + topic.id);
+  }
+}
+
+function renderSearchResults(query) {
+  const q = query.trim().toLowerCase();
+  if (!q) {
+    searchResults.hidden = true;
+    searchResults.innerHTML = "";
+    return;
   }
 
-  function resetButtons() {
-    document.querySelectorAll('.listen-btn').forEach(btn => {
-      btn.textContent = '▶ Read aloud';
+  const matches = TOPICS.filter(topic => buildSearchText(topic).includes(q));
+  searchResults.hidden = false;
+
+  if (!matches.length) {
+    searchResults.innerHTML = '<div class="empty">找不到符合的題目。</div>';
+    return;
+  }
+
+  searchResults.innerHTML = matches.map(topic =>
+    '<button class="result-card" type="button" data-id="' + topic.id + '">' +
+      '<span class="result-meta">' + escapeHtml(topic.category) + ' · ' + escapeHtml(topic.id) + '</span>' +
+      '<strong>' + escapeHtml(topic.question) + '</strong>' +
+      '<span>' + topic.tags.map(escapeHtml).join(" · ") + '</span>' +
+    '</button>'
+  ).join("");
+
+  searchResults.querySelectorAll(".result-card").forEach(button => {
+    button.addEventListener("click", () => {
+      const topic = TOPICS.find(t => t.id === button.dataset.id);
+      if (!topic) return;
+      categorySelect.value = topic.category;
+      populateQuestions(topic.id);
+      renderTopic(topic.id);
+      searchInput.value = "";
+      renderSearchResults("");
+      window.scrollTo({top: topicView.offsetTop - 18, behavior:"smooth"});
     });
-  }
-
-  function speakAnswer(btn) {
-    if (!('speechSynthesis' in window)) {
-      alert('Speech playback is not supported in this browser.');
-      return;
-    }
-
-    if (window.speechSynthesis.speaking) {
-      window.speechSynthesis.cancel();
-      resetButtons();
-      return;
-    }
-
-    const answerText = document.getElementById(btn.dataset.target);
-    if (!answerText) return;
-
-    const text = answerText.innerText.replace(/\s+/g, ' ').trim();
-    const utterance = new SpeechSynthesisUtterance(text);
-    const voice = getBritishFemaleVoice();
-
-    if (voice) utterance.voice = voice;
-    utterance.lang = 'en-GB';
-    utterance.rate = 0.88;
-    utterance.pitch = 0.92;
-    utterance.volume = 1;
-
-    utterance.onstart = () => {
-      resetButtons();
-      btn.textContent = '■ Stop';
-    };
-    utterance.onend = resetButtons;
-    utterance.onerror = resetButtons;
-
-    window.speechSynthesis.speak(utterance);
-  }
-
-  document.querySelectorAll('.listen-btn').forEach(btn => {
-    btn.addEventListener('click', () => speakAnswer(btn));
   });
+}
 
-  window.speechSynthesis.onvoiceschanged = function () {
-    window.speechSynthesis.getVoices();
-  };
-})();
+function getBritishFemaleVoice() {
+  const voices = window.speechSynthesis.getVoices();
+  const preferredNames = [
+    "Serena","Samantha","Martha","Kate","Stephanie",
+    "Google UK English Female","Microsoft Sonia Online","Microsoft Libby Online"
+  ];
+
+  for (const name of preferredNames) {
+    const found = voices.find(v =>
+      v.lang && v.lang.toLowerCase().startsWith("en-gb") &&
+      v.name.toLowerCase().includes(name.toLowerCase())
+    );
+    if (found) return found;
+  }
+
+  const femaleHints = ["female","serena","martha","kate","sonia","libby","susan","fiona","victoria"];
+  const femaleGB = voices.find(v =>
+    v.lang && v.lang.toLowerCase().startsWith("en-gb") &&
+    femaleHints.some(h => v.name.toLowerCase().includes(h))
+  );
+  if (femaleGB) return femaleGB;
+
+  return voices.find(v => v.lang && v.lang.toLowerCase().startsWith("en-gb")) || null;
+}
+
+function speakCurrentAnswer() {
+  const btn = document.getElementById("readAnswerBtn");
+
+  if (!("speechSynthesis" in window)) {
+    alert("Speech playback is not supported in this browser.");
+    return;
+  }
+
+  if (window.speechSynthesis.speaking) {
+    window.speechSynthesis.cancel();
+    btn.textContent = "▶ Read aloud";
+    return;
+  }
+
+  const answerText = document.getElementById("answerText");
+  const text = answerText.innerText.replace(/\s+/g, " ").trim();
+  const utterance = new SpeechSynthesisUtterance(text);
+  const voice = getBritishFemaleVoice();
+
+  if (voice) utterance.voice = voice;
+  utterance.lang = "en-GB";
+  utterance.rate = 0.88;
+  utterance.pitch = 0.92;
+  utterance.volume = 1;
+
+  utterance.onstart = () => { btn.textContent = "■ Stop"; };
+  utterance.onend = () => { btn.textContent = "▶ Read aloud"; };
+  utterance.onerror = () => { btn.textContent = "▶ Read aloud"; };
+
+  window.speechSynthesis.speak(utterance);
+}
+
+categorySelect.addEventListener("change", () => {
+  populateQuestions();
+  renderTopic(questionSelect.value);
+});
+
+questionSelect.addEventListener("change", () => {
+  renderTopic(questionSelect.value);
+});
+
+searchInput.addEventListener("input", event => {
+  renderSearchResults(event.target.value);
+});
+
+clearSearch.addEventListener("click", () => {
+  searchInput.value = "";
+  renderSearchResults("");
+  searchInput.focus();
+});
+
+window.speechSynthesis.onvoiceschanged = function () {
+  window.speechSynthesis.getVoices();
+};
+
+topicCount.textContent = TOPICS.length + " topics";
+libraryCount.textContent = TOPICS.length + " 題";
+
+populateCategories();
+
+const hashId = decodeURIComponent(location.hash.replace("#",""));
+const initialTopic = TOPICS.find(t => t.id === hashId) || TOPICS[0];
+categorySelect.value = initialTopic.category;
+populateQuestions(initialTopic.id);
+renderTopic(initialTopic.id, false);
 </script>
-
 </body>
 </html>
