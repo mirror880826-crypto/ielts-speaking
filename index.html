@@ -45,7 +45,7 @@
     font-size:14px;color:var(--muted)
   }
   .nav{
-    display:grid;grid-template-columns:repeat(4,1fr);
+    display:grid;grid-template-columns:repeat(2,1fr);
     border-top:1px solid var(--line);border-bottom:1px solid var(--line);
     margin-bottom:44px
   }
@@ -60,6 +60,7 @@
     padding:30px;
     box-shadow:0 9px 30px rgba(40,37,34,.06);
   }
+  .question-card + .question-card{margin-top:44px}
   .index{
     display:inline-block;color:var(--accent);font-weight:800;letter-spacing:.14em;
     margin-bottom:8px;font-size:13px
@@ -123,8 +124,6 @@
     .hero{padding:48px 0 38px}
     .topline{font-size:11px}
     .nav{grid-template-columns:1fr 1fr}
-    .nav a:nth-child(2){border-right:0}
-    .nav a:nth-child(-n+2){border-bottom:1px solid #bbb4aa}
     .question-card{padding:22px 18px}
     h2{font-size:25px}
     .prompt{font-size:17px}
@@ -144,20 +143,17 @@
   <header class="hero">
     <h1>SPEAKING <span class="accent">PRACTICE</span></h1>
     <div class="meta">
-      <span>Part 2</span>
-      <span>Natural Beauty</span>
-      <span>Topic 01</span>
+      <span>IELTS Speaking Part 2</span>
+      <span>Topic 01–02</span>
     </div>
   </header>
 
-  <nav class="nav" aria-label="頁面導覽">
-    <a href="#question">題目</a>
-    <a href="#keywords">關鍵字</a>
-    <a href="#answer">擬答</a>
-    <a href="#phrases">重要句型</a>
+  <nav class="nav" aria-label="題目導覽">
+    <a href="#topic-01">Topic 01 · Alishan</a>
+    <a href="#topic-02">Topic 02 · Parasite</a>
   </nav>
 
-  <article class="question-card">
+  <article class="question-card" id="topic-01">
     <span class="index">01 / NATURAL BEAUTY</span>
 
     <section id="question" class="section">
@@ -179,19 +175,14 @@
       <div class="chips">
         <span class="chip">Alishan · Chiayi</span>
         <span class="chip">mountain area</span>
-        <span class="chip">mountain views</span>
         <span class="chip">altitude increases</span>
         <span class="chip">wide variety of plants & trees</span>
-        <span class="chip">green forests</span>
         <span class="chip">huge old trees</span>
         <span class="chip">sunrise</span>
         <span class="chip">sea of clouds</span>
-        <span class="chip">golden light</span>
         <span class="chip">Alishan Forest Railway</span>
         <span class="chip">fresh mountain air</span>
-        <span class="chip">forest scenery</span>
-        <span class="chip">peaceful & relaxing</span>
-        <span class="chip">international tourists</span>
+        <span class="chip">peaceful atmosphere</span>
       </div>
     </section>
 
@@ -199,9 +190,9 @@
       <div class="section-title"><span class="num">03</span><h3>擬答</h3></div>
       <div class="answer">
         <div class="listen-row">
-          <button class="listen-btn" id="readAnswerBtn" type="button">▶ Read aloud</button>
+          <button class="listen-btn" type="button" data-target="answerText01">▶ Read aloud</button>
         </div>
-        <div id="answerText">
+        <div id="answerText01">
         <p>I would like to talk about Alishan, a famous mountain area in Chiayi, Taiwan. It is a very popular place for people who enjoy natural scenery and mountain views.</p>
 
         <p>What I really like about Alishan is its wide variety of plants and trees. One interesting feature is that the scenery gradually changes as the altitude increases. There are beautiful green forests and many huge old trees, which give the whole area a peaceful and relaxing atmosphere.</p>
@@ -266,17 +257,119 @@
     </section>
   </article>
 
+
+  <article class="question-card" id="topic-02">
+    <span class="index">02 / FILM</span>
+
+    <section id="question-02" class="section">
+      <div class="section-title"><span class="num">01</span><h3>題目</h3></div>
+      <div class="prompt">Describe a film you found interesting.</div>
+      <div class="cue">
+        <strong>You should say:</strong>
+        <ul>
+          <li>when you saw this film</li>
+          <li>why you decided to see this film</li>
+          <li>what happened in the film</li>
+          <li>and explain why you found this film interesting</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="keywords-02" class="section">
+      <div class="section-title"><span class="num">02</span><h3>關鍵字</h3></div>
+      <div class="chips">
+        <span class="chip">Parasite</span>
+        <span class="chip">Korean film</span>
+        <span class="chip">a lot of buzz</span>
+        <span class="chip">poor family</span>
+        <span class="chip">make ends meet</span>
+        <span class="chip">wealthy family</span>
+        <span class="chip">secure jobs</span>
+        <span class="chip">infiltrate a wealthy household</span>
+        <span class="chip">rich and poor</span>
+        <span class="chip">makes me think</span>
+      </div>
+    </section>
+
+    <section id="answer-02" class="section">
+      <div class="section-title"><span class="num">03</span><h3>擬答</h3></div>
+      <div class="answer">
+        <div class="listen-row">
+          <button class="listen-btn" type="button" data-target="answerText02">▶ Read aloud</button>
+        </div>
+        <div id="answerText02">
+          <p>I remember watching the Korean film <em>Parasite</em> a few years ago, mainly because of all the buzz it had generated overseas. There had been so much discussion about it that I became curious and decided to watch it. In the end, I felt that all the buzz was definitely worth it because the film was extraordinary.</p>
+
+          <p>The story follows a poor family living in a low-income area of Seoul, South Korea. There are four members in the family: a mother, a father, and their two children, a son and a daughter. They struggle to make ends meet and even fold pizza boxes to earn some extra money just to survive.</p>
+
+          <p>Their lives begin to change when the son gets an opportunity to work as a private tutor for the daughter of a wealthy family. This opens the door for the other members of his family to secure jobs working for the same household. The film essentially follows this poor family as they infiltrate a wealthy household, doing everything they can to work for them and make money.</p>
+
+          <p>What I find especially interesting about this film is the way it shows the huge difference between rich and poor people. It is not only about life in Korea, but also about society in general. I think the film gives a powerful picture of modern society and reminds people to appreciate what they have, while also showing how difficult life can be for people who are less fortunate.</p>
+
+          <p>For these reasons, I think <em>Parasite</em> is a fantastic film. I have watched it more than five times, and I still enjoy it every time. Whenever I watch it again, I notice something new. It is the kind of film that really makes me think.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="phrases-02" class="section">
+      <div class="section-title"><span class="num">04</span><h3>重要句型</h3></div>
+      <div class="phrase-list">
+        <div class="phrase">
+          <strong>I remember watching … a few years ago.</strong>
+          <span class="note">自然地交代過去的觀影經驗，也可以直接回答 when you saw this film。</span>
+        </div>
+        <div class="phrase">
+          <strong>There had been so much discussion about it that …</strong>
+          <span class="note">使用過去完成式搭配 so … that …，表達「在我看之前已經有很多討論，因此我……」。</span>
+        </div>
+        <div class="phrase">
+          <strong>all the buzz was definitely worth it</strong>
+          <span class="note"><b>buzz</b> 在這裡指話題度、熱度或大量討論。常見搭配有 a lot of buzz、generate buzz、create buzz。</span>
+        </div>
+        <div class="phrase">
+          <strong>struggle to make ends meet</strong>
+          <span class="note"><b>make ends meet</b> 是固定片語，意思是「勉強維持生計、讓收支打平」。struggle to make ends meet 表示經濟上過得很辛苦。</span>
+        </div>
+        <div class="phrase">
+          <strong>This opens the door for … to …</strong>
+          <span class="note">表示某件事為後續「創造機會」，很適合描述故事如何一步一步發展。</span>
+        </div>
+        <div class="phrase">
+          <strong>secure jobs working for the same household</strong>
+          <span class="note">secure 在這裡是「成功取得」的意思；secure a job 比 get a job 稍正式，但在這段情境很自然。</span>
+        </div>
+        <div class="phrase">
+          <strong>as they infiltrate a wealthy household</strong>
+          <span class="note"><b>infiltrate</b> 指「滲透、逐步潛入某個群體或組織」，帶有不是單純公開進入的語感，很貼合這部電影的情節。</span>
+        </div>
+        <div class="phrase">
+          <strong>What I find especially interesting about this film is …</strong>
+          <span class="note">直接回答「為什麼覺得這部電影有趣」，很適合進入 Part 2 最後的評價段落。</span>
+        </div>
+        <div class="phrase">
+          <strong>It is not only about …, but also about …</strong>
+          <span class="note">把觀點從單一故事延伸到更大的社會層次，句型簡單但很實用。</span>
+        </div>
+        <div class="phrase">
+          <strong>Whenever I watch it again, I notice something new.</strong>
+          <span class="note">用 whenever 表達「每次……都……」，也讓重看多次這個個人細節更自然。</span>
+        </div>
+        <div class="phrase">
+          <strong>It is the kind of film that really makes me think.</strong>
+          <span class="note">很適合電影題的自然收尾，簡單但能清楚表達這部電影帶來的思考。</span>
+        </div>
+      </div>
+    </section>
+  </article>
+
   <footer>
     <b>IELTS SPEAKING NOTES</b>
-    <span>Topic 01 · Alishan, Taiwan</span>
+    <span>Topic 01 · Alishan · Topic 02 · Parasite</span>
   </footer>
 </main>
 
 <script>
 (function () {
-  const btn = document.getElementById('readAnswerBtn');
-  const answerText = document.getElementById('answerText');
-
   function getBritishFemaleVoice() {
     const voices = window.speechSynthesis.getVoices();
     const preferredNames = [
@@ -303,7 +396,13 @@
     return voices.find(v => v.lang && v.lang.toLowerCase().startsWith('en-gb')) || null;
   }
 
-  function speakAnswer() {
+  function resetButtons() {
+    document.querySelectorAll('.listen-btn').forEach(btn => {
+      btn.textContent = '▶ Read aloud';
+    });
+  }
+
+  function speakAnswer(btn) {
     if (!('speechSynthesis' in window)) {
       alert('Speech playback is not supported in this browser.');
       return;
@@ -311,9 +410,12 @@
 
     if (window.speechSynthesis.speaking) {
       window.speechSynthesis.cancel();
-      btn.textContent = '▶ Read aloud';
+      resetButtons();
       return;
     }
+
+    const answerText = document.getElementById(btn.dataset.target);
+    if (!answerText) return;
 
     const text = answerText.innerText.replace(/\s+/g, ' ').trim();
     const utterance = new SpeechSynthesisUtterance(text);
@@ -326,19 +428,18 @@
     utterance.volume = 1;
 
     utterance.onstart = () => {
+      resetButtons();
       btn.textContent = '■ Stop';
     };
-    utterance.onend = () => {
-      btn.textContent = '▶ Read aloud';
-    };
-    utterance.onerror = () => {
-      btn.textContent = '▶ Read aloud';
-    };
+    utterance.onend = resetButtons;
+    utterance.onerror = resetButtons;
 
     window.speechSynthesis.speak(utterance);
   }
 
-  btn.addEventListener('click', speakAnswer);
+  document.querySelectorAll('.listen-btn').forEach(btn => {
+    btn.addEventListener('click', () => speakAnswer(btn));
+  });
 
   window.speechSynthesis.onvoiceschanged = function () {
     window.speechSynthesis.getVoices();
