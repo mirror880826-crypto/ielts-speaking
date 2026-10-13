@@ -391,7 +391,7 @@ function filteredItems(){
 }
 function populateQuestions(preferredId){
   const items=filteredItems();
-  questionSelect.innerHTML=items.map(item=>'<option value="'+item.id+'">'+item.id+" · "+escapeHtml(item.question)+'</option>').join("");
+  questionSelect.innerHTML=items.map(item=>'<option value="'+item.id+'">'+escapeHtml(item.topic||item.category||"Topic")+" — "+escapeHtml(item.question)+'</option>').join("");
   const chosen=items.find(item=>item.id===preferredId)||items[0];
   if(chosen){
     questionSelect.value=chosen.id;
@@ -417,7 +417,7 @@ function renderItem(id,updateHash=true){
 
   topicView.innerHTML=
     '<div class="topic-head">'+
-      '<span class="index">PART '+item.part+' / '+escapeHtml(item.category||item.topic||"")+' / '+escapeHtml(item.id)+'</span>'+
+      '<span class="index">PART '+item.part+' / '+escapeHtml(item.category||item.topic||"")+'</span>'+
       '<div class="tags">'+tags+'</div>'+
     '</div>'+
     '<section class="section"><div class="section-title"><span class="num">01</span><h3>題目</h3></div>'+
@@ -430,7 +430,7 @@ function renderItem(id,updateHash=true){
       '<div id="answerText">'+answers+'</div></div></section>'+
     '<section class="section"><div class="section-title"><span class="num">04</span><h3>重要句型</h3></div><div class="phrase-list">'+phrases+'</div></section>';
 
-  footerTopic.textContent=item.id+" · "+(item.topic||item.category);
+  footerTopic.textContent="Part "+item.part+" · "+(item.topic||item.category);
   document.getElementById("readAnswerBtn").addEventListener("click",speakCurrentAnswer);
   if(updateHash) history.replaceState(null,"","#"+item.id);
 }
@@ -445,7 +445,7 @@ function renderSearchResults(query){
   if(!matches.length){searchResults.innerHTML='<div class="empty">找不到符合的題目。</div>';return}
   searchResults.innerHTML=matches.map(item=>
     '<button class="result-card" type="button" data-id="'+item.id+'">'+
-      '<span class="result-meta">PART '+item.part+' · '+escapeHtml(item.category||item.topic||"")+' · '+escapeHtml(item.id)+'</span>'+
+      '<span class="result-meta">PART '+item.part+' · '+escapeHtml(item.topic||item.category||"")+'</span>'+
       '<strong>'+escapeHtml(item.question)+'</strong>'+
       '<span>'+((item.tags||[]).map(escapeHtml).join(" · "))+'</span>'+
     '</button>'
