@@ -494,9 +494,14 @@ function buildSearchText(item){
 }
 function renderLatestAnswers(){
   const latest=[...LIBRARY]
-    .filter(item=>item.createdAt)
+    .filter(item=>item.part===activePart&&item.createdAt)
     .sort((a,b)=>b.createdAt.localeCompare(a.createdAt))
     .slice(0,5);
+
+  if(!latest.length){
+    latestAnswers.innerHTML='<div class="empty">Part '+activePart+' 目前尚無最新題目。</div>';
+    return;
+  }
 
   latestAnswers.innerHTML=latest.map(item=>
     '<button class="latest-card" type="button" data-id="'+item.id+'">'+
@@ -615,7 +620,7 @@ function renderItem(id,updateHash=true){
   if(updateHash) history.replaceState(null,"","#"+item.id);
 }
 function setPart(part,preferredId){
-  activePart=part;syncTabs();populateFilters(preferredId);
+  activePart=part;syncTabs();renderLatestAnswers();populateFilters(preferredId);
 }
 function renderSearchResults(query){
   const q=query.trim().toLowerCase();
@@ -681,7 +686,6 @@ clearSearch.addEventListener("click",()=>{searchInput.value="";renderSearchResul
 window.speechSynthesis.onvoiceschanged=()=>window.speechSynthesis.getVoices();
 
 updateCounts();
-renderLatestAnswers();
 const initial=resolveHash();
 if(initial){setPart(initial.part,initial.id)}
 else{setPart(2,"P2-PLACE-001")}
