@@ -255,21 +255,11 @@ const LIBRARY = [
     tags: ["Work", "Study", "Current Status"],
     question: "Are you a student or do you work?",
     cuePoints: [],
-    keywords: [
-      "not working right now",
-      "quit my job two months ago",
-      "master's applications",
-      "IELTS test",
-      "graduated four years ago"
-    ],
+    keywords: [],
     answer: [
       "I am not working right now. I quit my job two months ago to prepare for my master's applications and the IELTS test. I graduated four years ago."
     ],
-    phrases: [
-      ["I am not working right now.","先直接回答目前狀態，再補充背景，避免考官聽到後面才知道答案。"],
-      ["I quit my job two months ago to prepare for …","用 to prepare for 說明離職目的，簡潔自然。"],
-      ["I graduated four years ago.","有明確過去時間 four years ago，所以使用一般過去式 graduated，不用現在完成式。"]
-    ]
+    phrases: []
   },
   {
     id: "P1-TEST1-002",
@@ -281,21 +271,11 @@ const LIBRARY = [
     tags: ["Home", "Apartment", "Roommates"],
     question: "Do you live in an apartment or a house?",
     cuePoints: [],
-    keywords: [
-      "third floor",
-      "apartment",
-      "roommates",
-      "three rooms",
-      "my own room"
-    ],
+    keywords: [],
     answer: [
       "I live on the third floor of an apartment and share it with my roommates. There are three rooms in the apartment, and I have my own room."
     ],
-    phrases: [
-      ["I live on the third floor of …","樓層前使用 on，而不是 in。"],
-      ["I share it with my roommates.","自然表達「和室友合租／共用這間公寓」。"],
-      ["I have my own room.","比 I own one room 更自然，因為這裡是在說自己有獨立房間，不是房屋所有權。"]
-    ]
+    phrases: []
   },
   {
     id: "P1-TEST1-003",
@@ -307,23 +287,11 @@ const LIBRARY = [
     tags: ["Home", "Apartment", "Living Space"],
     question: "What do you like about your house or apartment?",
     cuePoints: [],
-    keywords: [
-      "space",
-      "big enough",
-      "comfortable",
-      "dining table",
-      "eat dinner together",
-      "chat after work"
-    ],
+    keywords: [],
     answer: [
       "I like the space in my apartment. Each room is big enough, so I feel comfortable. There is also a big dining table in the living room. We often eat dinner together and chat after work."
     ],
-    phrases: [
-      ["I like the space in my apartment.","用 in my apartment，而不是 the space of my apartment。"],
-      ["Each room is big enough, so I feel comfortable.","用 so 自然連接「空間夠大」與「住得舒服」的結果。"],
-      ["There is also a big dining table in the living room.","also 自然地從私人空間補充到共享空間。"],
-      ["We often eat dinner together and chat after work.","直接描述實際生活習慣，比重複使用 can 更自然。"]
-    ]
+    phrases: []
   },
   {
     id: "P1-TEST1-004",
@@ -335,22 +303,11 @@ const LIBRARY = [
     tags: ["Home", "Apartment", "Problem"],
     question: "What do you not like about your house or apartment?",
     cuePoints: [],
-    keywords: [
-      "quite old",
-      "small leak",
-      "daily life",
-      "a bit annoying",
-      "keeps coming back"
-    ],
+    keywords: [],
     answer: [
       "Well, the apartment is quite old, so there is a small leak. It does not affect our daily life much, but the problem is a bit annoying because it keeps coming back."
     ],
-    phrases: [
-      ["Well, …","Part 1 很自然的口說起手式，不需要硬加正式連接詞。"],
-      ["There is a small leak.","日常口說中 small leak 比 small leakage problem 更自然。"],
-      ["It does not affect our daily life much.","簡潔表達問題存在，但影響不大。"],
-      ["… is a bit annoying because it keeps coming back.","a bit annoying 比 a bit of annoying 正確；keeps coming back 很自然地表達問題反覆出現。"]
-    ]
+    phrases: []
   },
   {
     id: "P2-PLACE-001",
@@ -627,6 +584,19 @@ function renderItem(id,updateHash=true){
   const answers=(item.answer||[]).map(p=>'<p>'+p+'</p>').join("");
   const phrases=(item.phrases||[]).map(([phrase,note])=>'<div class="phrase"><strong>'+phrase+'</strong><span class="note">'+note+'</span></div>').join("");
 
+  const hasKeywords=(item.keywords||[]).length>0;
+  const hasPhrases=(item.phrases||[]).length>0;
+  let sectionNum=2;
+  const keywordSection=hasKeywords
+    ? '<section class="section"><div class="section-title"><span class="num">0'+(sectionNum++)+'</span><h3>關鍵字</h3></div><div class="chips">'+keywords+'</div></section>'
+    : '';
+  const answerSection='<section class="section"><div class="section-title"><span class="num">0'+(sectionNum++)+'</span><h3>擬答</h3></div><div class="answer">'+
+      '<div class="listen-row"><button class="listen-btn" id="readAnswerBtn" type="button">▶ Read aloud</button></div>'+
+      '<div id="answerText">'+answers+'</div></div></section>';
+  const phraseSection=hasPhrases
+    ? '<section class="section"><div class="section-title"><span class="num">0'+sectionNum+'</span><h3>重要句型</h3></div><div class="phrase-list">'+phrases+'</div></section>'
+    : '';
+
   topicView.innerHTML=
     '<div class="topic-head">'+
       '<span class="index">PART '+item.part+' / '+escapeHtml(item.category||item.topic||"")+'</span>'+
@@ -636,11 +606,9 @@ function renderItem(id,updateHash=true){
       '<div class="prompt">'+escapeHtml(item.question)+'</div>'+
       (cue?'<div class="cue"><strong>You should say:</strong><ul>'+cue+'</ul></div>':'')+
     '</section>'+
-    '<section class="section"><div class="section-title"><span class="num">02</span><h3>關鍵字</h3></div><div class="chips">'+keywords+'</div></section>'+
-    '<section class="section"><div class="section-title"><span class="num">03</span><h3>擬答</h3></div><div class="answer">'+
-      '<div class="listen-row"><button class="listen-btn" id="readAnswerBtn" type="button">▶ Read aloud</button></div>'+
-      '<div id="answerText">'+answers+'</div></div></section>'+
-    '<section class="section"><div class="section-title"><span class="num">04</span><h3>重要句型</h3></div><div class="phrase-list">'+phrases+'</div></section>';
+    keywordSection+
+    answerSection+
+    phraseSection;
 
   footerTopic.textContent="Part "+item.part+" · "+(item.topic||item.category);
   document.getElementById("readAnswerBtn").addEventListener("click",speakCurrentAnswer);
