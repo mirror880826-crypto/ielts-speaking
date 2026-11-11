@@ -138,6 +138,13 @@ select:focus,input:focus{border-color:var(--accent)}
 }
 .answer{font-size:17px;max-width:780px}
 .answer p{margin:0 0 16px}
+.qa-list{display:grid;gap:0}
+.qa-item{padding:24px 0;border-top:1px solid #d6cec4}
+.qa-item:first-child{border-top:0;padding-top:8px}
+.qa-question{font-size:18px;font-weight:800;line-height:1.5;margin-bottom:12px}
+.qa-answer{font-size:16px;line-height:1.72;max-width:780px}
+.qa-answer p{margin:0}
+.qa-item .listen-row{margin:12px 0 0}
 .listen-row{display:flex;align-items:center;margin:0 0 20px}
 .listen-btn{
   appearance:none;border:0;border-radius:999px;background:var(--accent);color:#fff;
@@ -192,12 +199,12 @@ footer span{font-size:13px;opacity:.85}
     <h1>SPEAKING <span class="accent">PRACTICE</span></h1>
     <div class="meta">
       <span>IELTS Speaking Library</span>
-      <span id="totalCount">7 topics</span>
+      <span id="totalCount">4 topics</span>
     </div>
   </header>
 
   <nav class="part-tabs" aria-label="IELTS Speaking Parts">
-    <button class="part-tab" type="button" data-part="1">PART 1<span class="part-count" id="countP1">4 topics</span></button>
+    <button class="part-tab" type="button" data-part="1">PART 1<span class="part-count" id="countP1">1 test</span></button>
     <button class="part-tab active" type="button" data-part="2">PART 2<span class="part-count" id="countP2">3 topics</span></button>
     <button class="part-tab" type="button" data-part="3">PART 3<span class="part-count" id="countP3">0 topics</span></button>
   </nav>
@@ -247,66 +254,34 @@ footer span{font-size:13px;opacity:.85}
 const LIBRARY = [
   {
     id: "P1-TEST1-001",
-    aliases: [],
+    aliases: ["P1-TEST1-002","P1-TEST1-003","P1-TEST1-004"],
     part: 1,
-    category: "Part 1",
+    category: "Test",
     topic: "Test 1",
     createdAt: "2026-11-11",
-    tags: ["Work", "Study", "Current Status"],
-    question: "Are you a student or do you work?",
+    tags: ["Work", "Study", "Home", "Apartment"],
+    question: "Test 1",
     cuePoints: [],
     keywords: [],
-    answer: [
-      "I am not working right now. I quit my job two months ago to prepare for my master's applications and the IELTS test. I graduated four years ago."
+    questions: [
+      {
+        question: "Are you a student or do you work?",
+        answer: "I am not working right now. I quit my job two months ago to prepare for my master's applications and the IELTS test. I graduated four years ago."
+      },
+      {
+        question: "Do you live in an apartment or a house?",
+        answer: "I live on the third floor of an apartment and share it with my roommates. There are three rooms in the apartment, and I have my own room."
+      },
+      {
+        question: "What do you like about your house or apartment?",
+        answer: "I like the space in my apartment. Each room is big enough, so I feel comfortable. There is also a big dining table in the living room. We often eat dinner together and chat after work."
+      },
+      {
+        question: "What do you not like about your house or apartment?",
+        answer: "Well, the apartment is quite old, so there is a small leak. It does not affect our daily life much, but the problem is a bit annoying because it keeps coming back."
+      }
     ],
-    phrases: []
-  },
-  {
-    id: "P1-TEST1-002",
-    aliases: [],
-    part: 1,
-    category: "Part 1",
-    topic: "Test 1",
-    createdAt: "2026-11-11",
-    tags: ["Home", "Apartment", "Roommates"],
-    question: "Do you live in an apartment or a house?",
-    cuePoints: [],
-    keywords: [],
-    answer: [
-      "I live on the third floor of an apartment and share it with my roommates. There are three rooms in the apartment, and I have my own room."
-    ],
-    phrases: []
-  },
-  {
-    id: "P1-TEST1-003",
-    aliases: [],
-    part: 1,
-    category: "Part 1",
-    topic: "Test 1",
-    createdAt: "2026-11-11",
-    tags: ["Home", "Apartment", "Living Space"],
-    question: "What do you like about your house or apartment?",
-    cuePoints: [],
-    keywords: [],
-    answer: [
-      "I like the space in my apartment. Each room is big enough, so I feel comfortable. There is also a big dining table in the living room. We often eat dinner together and chat after work."
-    ],
-    phrases: []
-  },
-  {
-    id: "P1-TEST1-004",
-    aliases: [],
-    part: 1,
-    category: "Part 1",
-    topic: "Test 1",
-    createdAt: "2026-11-11",
-    tags: ["Home", "Apartment", "Problem"],
-    question: "What do you not like about your house or apartment?",
-    cuePoints: [],
-    keywords: [],
-    answer: [
-      "Well, the apartment is quite old, so there is a small leak. It does not affect our daily life much, but the problem is a bit annoying because it keeps coming back."
-    ],
+    answer: [],
     phrases: []
   },
   {
@@ -453,7 +428,7 @@ const LIBRARY = [
 ];
 
 const PART_CONFIG = {
-  1:{title:"Part 1 題庫", filterLabel:"TOPIC", empty:"Part 1 的內容之後會加入這裡。"},
+  1:{title:"Part 1 題庫", filterLabel:"TEST", empty:"Part 1 的內容之後會加入這裡."},
   2:{title:"Part 2 題庫", filterLabel:"CATEGORY", empty:"目前還沒有 Part 2 題目。"},
   3:{title:"Part 3 題庫", filterLabel:"DISCUSSION TOPIC", empty:"Part 3 的內容之後會加入這裡。"}
 };
@@ -485,9 +460,11 @@ function escapeHtml(text){
 function getPartItems(part){return LIBRARY.filter(item=>item.part===part)}
 function buildSearchText(item){
   const common=[item.id,item.part,item.category||"",item.topic||"",...(item.tags||[]),item.question||""];
+  const grouped=(item.questions||[]).flatMap(q=>[q.question||"",q.answer||""]);
   const details=[
     ...(item.cuePoints||[]),...(item.keywords||[]),
     ...(item.answer||[]).map(stripHtml),
+    ...grouped.map(stripHtml),
     ...((item.phrases||[]).flat().map(stripHtml))
   ];
   return [...common,...details].join(" ").toLowerCase();
@@ -503,12 +480,15 @@ function renderLatestAnswers(){
     return;
   }
 
-  latestAnswers.innerHTML=latest.map(item=>
-    '<button class="latest-card" type="button" data-id="'+item.id+'">'+
+  latestAnswers.innerHTML=latest.map(item=>{
+    const label=item.part===1&&item.questions
+      ? item.questions.length+" questions"
+      : item.question;
+    return '<button class="latest-card" type="button" data-id="'+item.id+'">'+
       '<span class="latest-topic">'+escapeHtml(item.topic||item.category||"Topic")+'</span>'+
-      '<span class="latest-question">'+escapeHtml(item.question)+'</span>'+
-    '</button>'
-  ).join("");
+      '<span class="latest-question">'+escapeHtml(label)+'</span>'+
+    '</button>';
+  }).join("");
 
   latestAnswers.querySelectorAll(".latest-card").forEach(btn=>{
     btn.addEventListener("click",()=>{
@@ -525,7 +505,8 @@ function updateCounts(){
   document.getElementById("totalCount").textContent=LIBRARY.length+" topics";
   [1,2,3].forEach(part=>{
     const n=getPartItems(part).length;
-    document.getElementById("countP"+part).textContent=n+" topic"+(n===1?"":"s");
+    const unit=part===1?" test"+(n===1?"":"s"):" topic"+(n===1?"":"s");
+    document.getElementById("countP"+part).textContent=n+unit;
   });
 }
 function syncTabs(){
@@ -536,7 +517,7 @@ function populateFilters(preferredId){
   const items=getPartItems(activePart);
   libraryTitle.textContent=config.title;
   categoryLabel.textContent=config.filterLabel;
-  libraryCount.textContent=items.length+" 題";
+  libraryCount.textContent=activePart===1?items.length+" 組":items.length+" 題";
 
   if(!items.length){
     categorySelect.innerHTML='<option>尚無內容</option>';
@@ -565,7 +546,12 @@ function filteredItems(){
 }
 function populateQuestions(preferredId){
   const items=filteredItems();
-  questionSelect.innerHTML=items.map(item=>'<option value="'+item.id+'">'+escapeHtml(item.topic||item.category||"Topic")+" — "+escapeHtml(item.question)+'</option>').join("");
+  questionSelect.innerHTML=items.map(item=>{
+    const label=item.part===1&&item.questions
+      ? (item.topic+" — "+item.questions.length+" questions")
+      : ((item.topic||item.category||"Topic")+" — "+item.question);
+    return '<option value="'+item.id+'">'+escapeHtml(label)+'</option>';
+  }).join("");
   const chosen=items.find(item=>item.id===preferredId)||items[0];
   if(chosen){
     questionSelect.value=chosen.id;
@@ -584,6 +570,34 @@ function renderItem(id,updateHash=true){
   activePart=item.part;activeId=item.id;syncTabs();
 
   const tags=(item.tags||[]).map(tag=>'<span class="tag">'+escapeHtml(tag)+'</span>').join("");
+
+  if(item.part===1&&item.questions){
+    const qaHtml=item.questions.map((qa,i)=>
+      '<div class="qa-item">'+
+        '<div class="qa-question">'+(i+1)+'. '+escapeHtml(qa.question)+'</div>'+
+        '<div class="qa-answer" id="qaAnswer'+i+'"><p>'+escapeHtml(qa.answer)+'</p></div>'+
+        '<div class="listen-row"><button class="listen-btn qa-listen-btn" data-index="'+i+'" type="button">▶ Read aloud</button></div>'+
+      '</div>'
+    ).join("");
+
+    topicView.innerHTML=
+      '<div class="topic-head">'+
+        '<span class="index">PART 1 / '+escapeHtml(item.topic)+'</span>'+
+        '<div class="tags">'+tags+'</div>'+
+      '</div>'+
+      '<section class="section"><div class="section-title"><span class="num">01</span><h3>'+escapeHtml(item.topic)+'</h3></div>'+
+        '<div class="qa-list">'+qaHtml+'</div>'+
+      '</section>';
+
+    topicView.querySelectorAll(".qa-listen-btn").forEach(btn=>{
+      btn.addEventListener("click",()=>speakElement("qaAnswer"+btn.dataset.index,btn));
+    });
+
+    footerTopic.textContent="Part 1 · "+item.topic;
+    if(updateHash) history.replaceState(null,"","#"+item.id);
+    return;
+  }
+
   const cue=(item.cuePoints||[]).map(point=>'<li>'+escapeHtml(point)+'</li>').join("");
   const keywords=(item.keywords||[]).map(keyword=>'<span class="chip">'+escapeHtml(keyword)+'</span>').join("");
   const answers=(item.answer||[]).map(p=>'<p>'+p+'</p>').join("");
@@ -628,13 +642,16 @@ function renderSearchResults(query){
   const matches=LIBRARY.filter(item=>buildSearchText(item).includes(q));
   searchResults.hidden=false;
   if(!matches.length){searchResults.innerHTML='<div class="empty">找不到符合的題目。</div>';return}
-  searchResults.innerHTML=matches.map(item=>
-    '<button class="result-card" type="button" data-id="'+item.id+'">'+
+  searchResults.innerHTML=matches.map(item=>{
+    const title=item.part===1&&item.questions
+      ? item.topic+" — "+item.questions.length+" questions"
+      : item.question;
+    return '<button class="result-card" type="button" data-id="'+item.id+'">'+
       '<span class="result-meta">PART '+item.part+' · '+escapeHtml(item.topic||item.category||"")+'</span>'+
-      '<strong>'+escapeHtml(item.question)+'</strong>'+
+      '<strong>'+escapeHtml(title)+'</strong>'+
       '<span>'+((item.tags||[]).map(escapeHtml).join(" · "))+'</span>'+
-    '</button>'
-  ).join("");
+    '</button>';
+  }).join("");
   searchResults.querySelectorAll(".result-card").forEach(btn=>{
     btn.addEventListener("click",()=>{
       const item=LIBRARY.find(x=>x.id===btn.dataset.id);
@@ -663,11 +680,16 @@ function getBritishFemaleVoice(){
   const female=voices.find(v=>v.lang&&v.lang.toLowerCase().startsWith("en-gb")&&hints.some(h=>v.name.toLowerCase().includes(h)));
   return female||voices.find(v=>v.lang&&v.lang.toLowerCase().startsWith("en-gb"))||null;
 }
-function speakCurrentAnswer(){
-  const btn=document.getElementById("readAnswerBtn");
+function speakElement(elementId,btn){
   if(!("speechSynthesis" in window)){alert("Speech playback is not supported in this browser.");return}
-  if(window.speechSynthesis.speaking){window.speechSynthesis.cancel();btn.textContent="▶ Read aloud";return}
-  const text=document.getElementById("answerText").innerText.replace(/\s+/g," ").trim();
+  if(window.speechSynthesis.speaking){
+    window.speechSynthesis.cancel();
+    document.querySelectorAll(".listen-btn").forEach(b=>b.textContent="▶ Read aloud");
+    return;
+  }
+  const element=document.getElementById(elementId);
+  if(!element)return;
+  const text=element.innerText.replace(/\s+/g," ").trim();
   const utterance=new SpeechSynthesisUtterance(text);
   const voice=getBritishFemaleVoice();
   if(voice)utterance.voice=voice;
@@ -676,6 +698,10 @@ function speakCurrentAnswer(){
   utterance.onend=()=>{btn.textContent="▶ Read aloud"};
   utterance.onerror=()=>{btn.textContent="▶ Read aloud"};
   window.speechSynthesis.speak(utterance);
+}
+function speakCurrentAnswer(){
+  const btn=document.getElementById("readAnswerBtn");
+  speakElement("answerText",btn);
 }
 
 partTabs.forEach(btn=>btn.addEventListener("click",()=>setPart(Number(btn.dataset.part))));
