@@ -192,12 +192,12 @@ footer span{font-size:13px;opacity:.85}
     <h1>SPEAKING <span class="accent">PRACTICE</span></h1>
     <div class="meta">
       <span>IELTS Speaking Library</span>
-      <span id="totalCount">3 topics</span>
+      <span id="totalCount">7 topics</span>
     </div>
   </header>
 
   <nav class="part-tabs" aria-label="IELTS Speaking Parts">
-    <button class="part-tab" type="button" data-part="1">PART 1<span class="part-count" id="countP1">0 topics</span></button>
+    <button class="part-tab" type="button" data-part="1">PART 1<span class="part-count" id="countP1">4 topics</span></button>
     <button class="part-tab active" type="button" data-part="2">PART 2<span class="part-count" id="countP2">3 topics</span></button>
     <button class="part-tab" type="button" data-part="3">PART 3<span class="part-count" id="countP3">0 topics</span></button>
   </nav>
@@ -245,6 +245,113 @@ footer span{font-size:13px;opacity:.85}
 
 <script>
 const LIBRARY = [
+  {
+    id: "P1-TEST1-001",
+    aliases: [],
+    part: 1,
+    category: "Part 1",
+    topic: "Test 1",
+    createdAt: "2026-11-11",
+    tags: ["Work", "Study", "Current Status"],
+    question: "Are you a student or do you work?",
+    cuePoints: [],
+    keywords: [
+      "not working right now",
+      "quit my job two months ago",
+      "master's applications",
+      "IELTS test",
+      "graduated four years ago"
+    ],
+    answer: [
+      "I am not working right now. I quit my job two months ago to prepare for my master's applications and the IELTS test. I graduated four years ago."
+    ],
+    phrases: [
+      ["I am not working right now.","先直接回答目前狀態，再補充背景，避免考官聽到後面才知道答案。"],
+      ["I quit my job two months ago to prepare for …","用 to prepare for 說明離職目的，簡潔自然。"],
+      ["I graduated four years ago.","有明確過去時間 four years ago，所以使用一般過去式 graduated，不用現在完成式。"]
+    ]
+  },
+  {
+    id: "P1-TEST1-002",
+    aliases: [],
+    part: 1,
+    category: "Part 1",
+    topic: "Test 1",
+    createdAt: "2026-11-11",
+    tags: ["Home", "Apartment", "Roommates"],
+    question: "Do you live in an apartment or a house?",
+    cuePoints: [],
+    keywords: [
+      "third floor",
+      "apartment",
+      "roommates",
+      "three rooms",
+      "my own room"
+    ],
+    answer: [
+      "I live on the third floor of an apartment and share it with my roommates. There are three rooms in the apartment, and I have my own room."
+    ],
+    phrases: [
+      ["I live on the third floor of …","樓層前使用 on，而不是 in。"],
+      ["I share it with my roommates.","自然表達「和室友合租／共用這間公寓」。"],
+      ["I have my own room.","比 I own one room 更自然，因為這裡是在說自己有獨立房間，不是房屋所有權。"]
+    ]
+  },
+  {
+    id: "P1-TEST1-003",
+    aliases: [],
+    part: 1,
+    category: "Part 1",
+    topic: "Test 1",
+    createdAt: "2026-11-11",
+    tags: ["Home", "Apartment", "Living Space"],
+    question: "What do you like about your house or apartment?",
+    cuePoints: [],
+    keywords: [
+      "space",
+      "big enough",
+      "comfortable",
+      "dining table",
+      "eat dinner together",
+      "chat after work"
+    ],
+    answer: [
+      "I like the space in my apartment. Each room is big enough, so I feel comfortable. There is also a big dining table in the living room. We often eat dinner together and chat after work."
+    ],
+    phrases: [
+      ["I like the space in my apartment.","用 in my apartment，而不是 the space of my apartment。"],
+      ["Each room is big enough, so I feel comfortable.","用 so 自然連接「空間夠大」與「住得舒服」的結果。"],
+      ["There is also a big dining table in the living room.","also 自然地從私人空間補充到共享空間。"],
+      ["We often eat dinner together and chat after work.","直接描述實際生活習慣，比重複使用 can 更自然。"]
+    ]
+  },
+  {
+    id: "P1-TEST1-004",
+    aliases: [],
+    part: 1,
+    category: "Part 1",
+    topic: "Test 1",
+    createdAt: "2026-11-11",
+    tags: ["Home", "Apartment", "Problem"],
+    question: "What do you not like about your house or apartment?",
+    cuePoints: [],
+    keywords: [
+      "quite old",
+      "small leak",
+      "daily life",
+      "a bit annoying",
+      "keeps coming back"
+    ],
+    answer: [
+      "Well, the apartment is quite old, so there is a small leak. It does not affect our daily life much, but the problem is a bit annoying because it keeps coming back."
+    ],
+    phrases: [
+      ["Well, …","Part 1 很自然的口說起手式，不需要硬加正式連接詞。"],
+      ["There is a small leak.","日常口說中 small leak 比 small leakage problem 更自然。"],
+      ["It does not affect our daily life much.","簡潔表達問題存在，但影響不大。"],
+      ["… is a bit annoying because it keeps coming back.","a bit annoying 比 a bit of annoying 正確；keeps coming back 很自然地表達問題反覆出現。"]
+    ]
+  },
   {
     id: "P2-PLACE-001",
     aliases: ["PLACE-001"],
